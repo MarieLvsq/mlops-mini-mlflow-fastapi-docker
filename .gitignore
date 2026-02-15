@@ -1,0 +1,16 @@
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# MLflow local artifacts / db (if not using volumes)
+mlruns/
+mlflow.db
+
+# Logs / artifacts
+artifacts/
+
+# macOS
+.DS_Store
