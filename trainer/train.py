@@ -22,6 +22,8 @@ from sklearn.metrics import (
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
+from mlflow.models.signature import infer_signature
+from mlflow import MlflowClient
 
 
 def sha256_file(path: str) -> str:
@@ -151,14 +153,38 @@ def main():
         mlflow.log_artifact(str(report_txt_path))
         mlflow.log_artifact(str(manifest_path))
 
-        # Log model
-        mlflow.sklearn.log_model(model, artifact_path="model")
+        # Log model (with schema + input example)
+        input_example = X_train.iloc[:5]
+        signature = infer_signature(X_train, model.predict_proba(X_train)[:, 1])
+
+        mlflow.sklearn.log_model(
+            model,
+            artifact_path="model",
+            signature=signature,
+            input_example=input_example
+        )
 
         print("✅ MLflow run logged.")
         print("Run ID:", run.info.run_id)
         print("Data SHA256:", data_hash)
         print("Metrics:", metrics)
 
+        # Registration
+        client = MlflowClient()
+        model_uri = f"runs:/{run.info.run_id}/model"
+        registered = mlflow.register_model(model_uri=model_uri, name="breast_cancer_classifier")
+        print("✅ Registered model:")
+        print("Name: breast_cancer_classifier")
+        print("Version:", registered.version)
+
+        # Transition to Staging
+        client.transition_model_version_stage(
+            name="breast_cancer_classifier",
+            version=str(registered.version),
+            stage="Staging",
+            archive_existing_versions=False
+            )
+        print("✅ Transitioned to Staging")
 
 if __name__ == "__main__":
     main()
