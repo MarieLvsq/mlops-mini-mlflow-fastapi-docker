@@ -1,10 +1,10 @@
 # Mini MLOps Stack: MLflow Tracking + Model Registry + FastAPI Serving (Breast Cancer)
 
 An end-to-end, audit-friendly mini project demonstrating:
-- MLflow **experiment tracking** (params, metrics, artifacts)
+- MLflow **experiment tracking** (params, metrics, artefacts)
 - MLflow **Model Registry** (versioning + Staging promotion)
 - **FastAPI** model serving loading from registry stage (`models:/.../Staging`)
-- Basic governance artifacts (dataset fingerprinting, model signature, traceability)
+- Basic governance artefacts (dataset fingerprinting, model signature, traceability)
 
 > Portfolio / educational project only — not for clinical use.
 
@@ -59,7 +59,7 @@ python3 trainer/train.py
 In MLflow UI, confirm the latest run contains:
 - params + metrics
 - artifacts (confusion matrix + classification reports + run_manifest.json)
-- model artifact with signature + input_example.json
+- model artefact with signature + input_example.json
 
 ### 6) Register and promote the model (MLflow UI)
 In MLflow UI:
@@ -116,7 +116,7 @@ Suggested files:
  • docs/screenshots/Day3_API_Predict_Response_With_Traceability.png
 
 
-### Governance (audit / compliance notes)
+### Governance (audit/compliance notes)
 
 See: docs/governance_notes.md
 
@@ -128,5 +128,5 @@ Covers:
  • serving traceability (model version + source run id)
 
 ### Notes
- • Portfolio demo: no authentication/authorization by default.
+ • Portfolio demo: no authentication/authorisation by default.
  • Not intended for clinical diagnosis or decision support.
