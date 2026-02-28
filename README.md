@@ -119,6 +119,7 @@ Suggested files:
 ### Governance (audit / compliance notes)
 
 See: docs/governance_notes.md
+
 Covers:
  • dataset fingerprinting (data_sha256)
  • reproducibility controls (pinned deps + seeded split)
