@@ -25,30 +25,36 @@ An end-to-end, audit-friendly mini project demonstrating:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-python3 -m pip install -U pip```
+python3 -m pip install -U pip
+```
+
 
 ### 2) Install dependencies
 ```bash
 python3 -m pip install -r trainer/requirements.txt
-python3 -m pip install -r api/requirements.txt```
+python3 -m pip install -r api/requirements.txt
+```
 
 ### 3) Ensure dataset exists
 ```bash
-ls -lh data/breast_cancer.csv```
+ls -lh data/breast_cancer.csv
+```
 
 ### 4) Run MLflow UI (port 5001)
 Port 5000 may be occupied on macOS, so we use 5001.
 
 ```bash
 export MLFLOW_TRACKING_URI="file:./mlruns"
-python3 -m mlflow ui --host 127.0.0.1 --port 5001 --backend-store-uri file:./mlruns```
+python3 -m mlflow ui --host 127.0.0.1 --port 5001 --backend-store-uri file:./mlruns
+```
 
 Open: http://127.0.0.1:5001
 
 ### 5) Train and log an MLflow run
 ```bash
 export MLFLOW_TRACKING_URI="file:./mlruns"
-python3 trainer/train.py```
+python3 trainer/train.py
+```
 
 In MLflow UI, confirm the latest run contains:
 - params + metrics
@@ -120,5 +126,5 @@ Covers:
  • serving traceability (model version + source run id)
 
 ### Notes
-	• Portfolio demo: no authentication/authorization by default.
-	• Not intended for clinical diagnosis or decision support.
+ • Portfolio demo: no authentication/authorization by default.
+ • Not intended for clinical diagnosis or decision support.
