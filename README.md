@@ -112,8 +112,8 @@ curl -s -X POST "http://127.0.0.1:8000/predict" \
 ### Screenshots
 
 Suggested files:
- • docs/screenshots/Day1_MLflow_Run_Overview_Params_Metrics.png
- • docs/screenshots/Day3_API_Predict_Response_With_Traceability.png
+- docs/screenshots/Day1_MLflow_Run_Overview_Params_Metrics.png
+- docs/screenshots/Day3_API_Predict_Response_With_Traceability.png
 
 
 ### Governance (audit/compliance notes)
@@ -121,14 +121,13 @@ Suggested files:
 See: docs/governance_notes.md
 
 Covers:
-
-• dataset fingerprinting (data_sha256)
-• reproducibility controls (pinned deps + seeded split)
-• evaluation evidence artefacts
-• model signature contract + registry promotion gate
-• serving traceability (model version + source run id)
+- dataset fingerprinting (data_sha256)
+- reproducibility controls (pinned deps + seeded split)
+- evaluation evidence artefacts
+- model signature contract + registry promotion gate
+- serving traceability (model version + source run id)
 
 ### Notes
 
-Portfolio demo: no authentication/authorisation by default.
-Not intended for clinical diagnosis or decision support.
+- Portfolio demo: no authentication/authorisation by default.
+- Not intended for clinical diagnosis or decision support.
