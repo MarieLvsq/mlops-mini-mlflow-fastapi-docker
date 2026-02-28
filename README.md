@@ -94,6 +94,7 @@ print(json.dumps(payload, indent=2))
 PY
 ```
 
+Paste the output into Swagger (POST /predict), or save to a file and call with curl:
 ```bash
 python3 - <<'PY' > payload.json
 import json, pandas as pd
