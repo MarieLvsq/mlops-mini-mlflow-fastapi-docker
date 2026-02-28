@@ -121,6 +121,7 @@ Suggested files:
 See: docs/governance_notes.md
 
 Covers:
+
 • dataset fingerprinting (data_sha256)
 • reproducibility controls (pinned deps + seeded split)
 • evaluation evidence artefacts
@@ -128,5 +129,6 @@ Covers:
 • serving traceability (model version + source run id)
 
 ### Notes
-• Portfolio demo: no authentication/authorisation by default.
-• Not intended for clinical diagnosis or decision support.
+
+Portfolio demo: no authentication/authorisation by default.
+Not intended for clinical diagnosis or decision support.
