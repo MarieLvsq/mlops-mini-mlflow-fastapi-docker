@@ -96,6 +96,14 @@ def validate_and_build_dataframe(features: Dict[str, float]) -> pd.DataFrame:
     row = {name: float(features[name]) for name in _expected_features}
     return pd.DataFrame([row])
 
+@app.get("/predict-example")
+def predict_example():
+    df = pd.read_csv("data/breast_cancer.csv")
+    row = df.drop(columns=["target"]).iloc[0].to_dict()
+    return {
+        "request_id": "demo-001",
+        "features": {k: float(v) for k, v in row.items()},
+    }
 
 @app.post("/predict", response_model=PredictResponse)
 def predict(req: PredictRequest):
