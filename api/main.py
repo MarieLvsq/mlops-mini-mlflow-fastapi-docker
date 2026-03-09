@@ -1,9 +1,7 @@
 import os
 import uuid
-from typing import Any, Dict, List, Tuple, Optional
-
+from typing import Dict, List, Optional
 import mlflow
-import numpy as np
 import pandas as pd
 from fastapi import FastAPI, HTTPException
 from mlflow.tracking import MlflowClient
@@ -97,14 +95,15 @@ def validate_and_build_dataframe(features: Dict[str, float]) -> pd.DataFrame:
     return pd.DataFrame([row])
 
 @app.get("/predict-example")
-def predict_example():
-    df = pd.read_csv("data/breast_cancer.csv")
-    row = df.drop(columns=["target"]).iloc[0].to_dict()
+def predict_example(i: int = 0):
+    df = pd.read_csv("/app/data/breast_cancer.csv")
+    i = max(0, min(i, len(df) - 1))
+    row = df.drop(columns=["target"]).iloc[i].to_dict()
     return {
-        "request_id": "demo-001",
+        "request_id": f"demo-{i:03d}",
+        "row_index": i,
         "features": {k: float(v) for k, v in row.items()},
     }
-
 @app.post("/predict", response_model=PredictResponse)
 def predict(req: PredictRequest):
     if _model is None:
@@ -114,12 +113,10 @@ def predict(req: PredictRequest):
     X = validate_and_build_dataframe(req.features)
 
     # Predict probability and label
-    # proba may be shape (n,) or (n,1) depending on signature; normalize
-    proba_val = float(_model.predict_proba(X)[:, 1][0])
-    # We return probability for the "positive class" (class=1). In this dataset, class=1 is benign.
+    # proba may be shape (n,) or (n,1) depending on signature; normalise
     proba_pos = float(_model.predict_proba(X)[:, 1][0])  # P(class=1)
     pred = int(proba_pos >= THRESHOLD)
-    label = "benign" if pred == 1 else "malignant"
+    label = POSITIVE_CLASS_LABEL if pred == 1 else NEGATIVE_CLASS_LABEL
 
     return PredictResponse(
         request_id=request_id,
@@ -129,5 +126,4 @@ def predict(req: PredictRequest):
         probability_positive_class=proba_pos,
         prediction=pred,
         prediction_label=label,
-        probability=proba_val,
     )

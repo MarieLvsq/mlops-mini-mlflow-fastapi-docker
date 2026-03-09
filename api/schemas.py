@@ -16,4 +16,3 @@ class PredictResponse(BaseModel):
     probability_positive_class: float
     prediction: int
     prediction_label: str
-    probability: float
