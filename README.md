@@ -15,6 +15,21 @@ An end-to-end, audit-friendly mini project demonstrating:
 - **api/**: FastAPI service loading the **Staging** model from MLflow Registry
 
 
+## Docker Quickstart (one-command stack)
+
+This runs:
+- **MLflow Tracking Server** (with persistent SQLite backend + artifact volume)
+- **FastAPI** serving the model from MLflow Model Registry (**Staging**)
+
+### 0) Prerequisites
+- Docker Desktop (running)
+- Docker Compose v2 (`docker compose`)
+
+Verify:
+```bash
+docker --version
+docker compose version
+
 ## Quickstart
 
 ### 0) Prerequisites
