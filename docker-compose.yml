@@ -1,0 +1,38 @@
+services:
+  mlflow:
+    build:
+      context: .
+      dockerfile: mlflow/Dockerfile
+    container_name: mlflow-server
+    ports:
+      - "5001:5000"   # host:container
+    volumes:
+      - mlflow_db:/mlflow/db
+      - mlflow_artifacts:/mlflow/artifacts
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri sqlite:////mlflow/db/mlflow.db
+      --artifacts-destination /mlflow/artifacts
+
+  api:
+    build:
+      context: .
+      dockerfile: api/Dockerfile
+    container_name: breast-cancer-api
+    depends_on:
+      - mlflow
+    ports:
+      - "8000:8000"
+    environment:
+      # IMPORTANT: API must point to MLflow server inside the compose network
+      - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - MODEL_NAME=breast_cancer_classifier
+      - MODEL_STAGE=Staging
+      - THRESHOLD=0.5
+    restart: unless-stopped
+
+volumes:
+  mlflow_db:
+  mlflow_artifacts:
