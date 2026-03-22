@@ -142,6 +142,17 @@ Covers:
 - model signature contract + registry promotion gate
 - serving traceability (model version + source run id)
 
+## Governance & Controls (GRC / IT Risk)
+
+- Core governance note: [`docs/governance_notes.md`](docs/governance_notes.md)
+- GRC pack: [`docs/grc/`](docs/grc/)
+
+Key controls implemented:
+- **Traceability:** model_version + source_run_id exposed via `/model-info`
+- **Change control:** MLflow Model Registry versioning + Staging gate
+- **Contract enforcement:** MLflow signature + strict feature validation (422 on mismatch)
+- **Evidence:** metrics + artifacts per run in MLflow
+
 ### Notes
 
 - Portfolio demo: no authentication/authorisation by default.
