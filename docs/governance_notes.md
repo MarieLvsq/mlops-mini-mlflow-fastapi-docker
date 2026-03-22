@@ -1,5 +1,7 @@
 # Governance / Compliance Notes (Mini MLOps Project)
 
+> Detailed GRC pack: [`docs/grc/`](grc/)
+
 ## 1. Purpose and scope
 This repository demonstrates an audit-friendly ML workflow for a binary classification model trained on the Breast Cancer Wisconsin dataset. It implements:
 - experiment tracking (MLflow)

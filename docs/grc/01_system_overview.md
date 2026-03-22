@@ -1,5 +1,7 @@
 # System Overview (GRC View)
 
+> High-level governance summary: [`../governance_notes.md`](../governance_notes.md)
+
 ## Objective
 Demonstrate an audit-friendly ML workflow and controlled model serving lifecycle aligned with IT risk controls:
 - traceability (run_id, model version)
