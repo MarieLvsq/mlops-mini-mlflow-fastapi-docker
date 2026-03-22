@@ -29,6 +29,7 @@ Verify:
 ```bash
 docker --version
 docker compose version
+```
 
 ## Quickstart
 
